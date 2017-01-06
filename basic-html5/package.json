@@ -8,8 +8,10 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.18.5",
+  "devDependencies": {},
+  "dependencies": {
+    "angular-ui-bootstrap": "^2.4.0",
+    "browser-sync": "^2.18.6",
     "gulp": "^3.9.1"
   }
 }
