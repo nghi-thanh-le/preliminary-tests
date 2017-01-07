@@ -3,26 +3,37 @@
 var myApp = angular.module('myApp', ['ngAnimate', 'ui.bootstrap']);
 
 myApp.controller('myController', function($scope, $uibModal, $log) {
+        $scope.newUser = {
+            name: '',
+            gender: '',
+            age: 0
+        };
+
         $scope.users = [{
-            name: "John Doe",
-            gender: "Male",
-            age: 32
+            name: 'John Doe',
+            gender: 'Male',
+            age: 32,
+            edit: true
         }, {
-            name: "Diana Barry",
-            gender: "Female",
-            age: 28
+            name: 'Diana Barry',
+            gender: 'Female',
+            age: 28,
+            edit: true
         }, {
-            name: "Bruce Wayne",
-            gender: "Male",
-            age: 46
+            name: 'Bruce Wayne',
+            gender: 'Male',
+            age: 46,
+            edit: true
         }, {
-            name: "Jane Porter",
-            gender: "Female",
-            age: 19
+            name: 'Jane Porter',
+            gender: 'Female',
+            age: 19,
+            edit: true
         }];
 
         $scope.addUser = function() {
-            var user = angular.copy($scope.user);
+            var user = angular.copy($scope.newUser);
+            user.edit = true;
             $scope.users.push(user);
         }
 
@@ -44,7 +55,7 @@ myApp.controller('myController', function($scope, $uibModal, $log) {
         }
 
         $scope.editUser = function(index) {
-            console.log('nah!!!!');
+            $scope.users[index].edit = !$scope.users[index].edit;
         }
     })
     .controller('removeUserController', function($scope, $uibModalInstance) {

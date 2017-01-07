@@ -12,13 +12,13 @@
             <h1>Add a person</h1>
             <form class="form-inline">
                 <div class="form-group">
-                    <input type="text" placeholder="Name" class="form-control" ng-model="user.name">
-                    <select class="form-control" id="select" ng-model="user.gender">
+                    <input type="text" placeholder="Name" class="form-control" ng-model="newUser.name">
+                    <select class="form-control" id="select" ng-model="newUser.gender">
                         <option value="" disabled selected>Gender</option>
                         <option>Male</option>
                         <option>Female</option>
                     </select>
-                    <input type="number" placeholder="Age" class="form-control" ng-model="user.age">
+                    <input type="number" placeholder="Age" class="form-control" ng-model="newUser.age">
                     <button type="button" class="btn btn-default" ng-click="addUser()">Submit</button>
                 </div>
             </form>
@@ -34,11 +34,23 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="user in users track by $index">
-                        <td>{{user.name}}</td>
-                        <td>{{user.gender}}</td>
-                        <td>{{user.age}}</td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-success">Edit</button>
+                            {{user.edit ? user.name : null}}
+                            <input type="text" ng-model="user.name" class="form-control" ng-hide="user.edit">
+                        </td>
+                        <td>
+                            {{user.edit ? user.gender : null}}
+                            <select ng-model="user.gender" class="form-control" ng-hide="user.edit">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </td>
+                        <td>
+                            {{user.edit ? user.age : null}}
+                            <input type="number" ng-model="user.age" class="form-control" ng-hide="user.edit">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-success" ng-click="editUser($index)">Edit</button>
                             <button type="button" class="btn btn-xs btn-warning" ng-click="removeUser($index)">Delete</button>
                         </td>
                     </tr>
