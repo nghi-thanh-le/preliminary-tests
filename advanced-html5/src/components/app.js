@@ -13,7 +13,7 @@ class App extends React.Component {
         return (
             <div className="container">
                 <AddUser addUser={this.props.addUser}/>
-                <UsersTable users={this.props.users}/>
+                <UsersTable users={this.props.users} editUser={this.props.editUser} deleteUser={this.props.deleteUser}/>
             </div>
         );
     }
@@ -31,6 +31,17 @@ const mapDispatchToProps = function (dispatch) {
             dispatch({
                 type: 'ADD_USERS',
                 user
+            });
+        },
+        editUser: function () {
+            dispatch({
+                type: 'EDIT_USERS'
+            });
+        },
+        deleteUser: function (index) {
+            dispatch({
+                type: 'DELETE_USERS',
+                index
             });
         }
     };

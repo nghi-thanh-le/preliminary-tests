@@ -23,14 +23,15 @@ const initialState = [{
 export default (state = initialState, action) => {
     let newState = [].concat(state);
     switch (action.type) {
-        case 'UPDATE_USERS':
+        case 'EDIT_USERS':
             return action.users;
             break;
         case 'ADD_USERS':
             return newState.concat([action.user]);
             break;
         case 'DELETE_USERS':
-            return action.users;
+            newState.splice(action.index, 1);
+            return newState;
             break;
         default:
             return state;
