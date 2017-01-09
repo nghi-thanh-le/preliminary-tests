@@ -5,10 +5,14 @@ import AddUser from './addUser';
 import UsersTable from './usersTable';
 
 class App extends React.Component {
+    componentDidMount() {
+        console.log('App.props:::::', this.props);
+    }
+
     render() {
         return (
             <div className="container">
-                <AddUser />
+                <AddUser addUser={this.props.addUser}/>
                 <UsersTable users={this.props.users}/>
             </div>
         );
@@ -17,13 +21,18 @@ class App extends React.Component {
 
 const mapStateToProps = function (state) {
     return {
-        users: state.users
+        users: state
     };
 }
 
 const mapDispatchToProps = function (dispatch) {
     return {
-
+        addUser: function (user) {
+            dispatch({
+                type: 'ADD_USERS',
+                user
+            });
+        }
     };
 }
 
