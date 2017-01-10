@@ -8,10 +8,24 @@ class UsersTable extends React.Component {
             showModal: false,
             indexToDelete: -1
         };
-
+        this.edit = this.edit.bind(this);
         this.close = this.close.bind(this);
         this.hide = this.hide.bind(this);
         this.open = this.open.bind(this);
+    }
+
+    edit(index) {
+        if(this.props.users[index].edit) {
+            this.props.editUser(index, {
+                name: this.refs.editUserName.value,
+                age: this.refs.editUserAge.value,
+                gender: this.refs.editUserGender.value,
+                edit: true
+            });
+            this.props.toggleEdit(index);
+        } else {
+            this.props.toggleEdit(index);
+        }
     }
 
     close() {
@@ -52,11 +66,22 @@ class UsersTable extends React.Component {
                         {this.props.users.map((user, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{user.name}</td>
-                                    <td>{user.gender}</td>
-                                    <td>{user.age}</td>
                                     <td>
-                                        <button type='button' className='btn btn-xs btn-success' onClick={this.props.editUser}>Edit</button>
+                                        {user.edit ? <input type='text' ref='editUserName' className='form-control' defaultValue={user.name}/> : user.name}
+                                    </td>
+                                    <td>
+                                        {user.edit ?
+                                            <select ref='editUserGender' className='form-control' defaultValue={user.gender}>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select> : user.gender
+                                        }
+                                    </td>
+                                    <td>
+                                        {user.edit ? <input type='number' ref='editUserAge' className='form-control' defaultValue={user.age}/> : user.age}
+                                    </td>
+                                    <td>
+                                        <button type='button' className='btn btn-xs btn-success' onClick={() => {this.edit(index)}}>Edit</button>
                                         <button type='button' className='btn btn-xs btn-warning' onClick={() => {this.open(index)}}>Delete</button>
                                     </td>
                                 </tr>
@@ -82,26 +107,3 @@ class UsersTable extends React.Component {
 };
 
 export default UsersTable;
-
-
-// <tr ng-repeat='user in users track by $index'>
-//     <td>
-//         {{user.edit ? user.name : null}}
-//         <input type='text' ng-model='user.name' className='form-control' ng-hide='user.edit'>
-//     </td>
-//     <td>
-//         {{user.edit ? user.gender : null}}
-//         <select ng-model='user.gender' className='form-control' ng-hide='user.edit'>
-//             <option>Male</option>
-//             <option>Female</option>
-//         </select>
-//     </td>
-//     <td>
-//         {{user.edit ? user.age : null}}
-//         <input type='number' ng-model='user.age' className='form-control' ng-hide='user.edit'>
-//     </td>
-    // <td>
-    //     <button type='button' className='btn btn-xs btn-success' ng-click='editUser($index)'>Edit</button>
-    //     <button type='button' className='btn btn-xs btn-warning' ng-click='removeUser($index)'>Delete</button>
-    // </td>
-// </tr>
