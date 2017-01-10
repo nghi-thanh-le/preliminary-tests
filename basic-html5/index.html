@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <title>Basic HTML5</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
-
     </head>
     <body ng-app="myApp">
         <nav class="navbar navbar-inverse">
@@ -42,17 +42,39 @@
                 <p ng-message="required">Your age is required.</p>
             </div>
 
-            <table class="table">
+            <br>
+
+            <button type="button" ng-click="resetSort()" class="btn btn-default">Reset Sort</button>
+
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Age</th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                                Name
+                                <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'gender'; sortReverse = !sortReverse">
+                                Gender
+                                <span ng-show="sortType == 'gender' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'gender' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="#" ng-click="sortType = 'age'; sortReverse = !sortReverse">
+                                Age
+                                <span ng-show="sortType == 'age' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'age' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="user in users track by $index">
+                    <tr ng-repeat="user in users | orderBy:sortType:sortReverse track by $index">
                         <td>
                             {{user.edit ? user.name : null}}
                             <input type="text" ng-model="user.name" class="form-control" ng-hide="user.edit">
@@ -70,7 +92,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-xs btn-success" ng-click="editUser($index)">Edit</button>
-                            <button type="button" class="btn btn-xs btn-warning" ng-click="removeUser($index)">Delete</button>
+                            <button type="button" class="btn btn-xs btn-warning" ng-click="removeUser(user.id)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
