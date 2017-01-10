@@ -1,6 +1,6 @@
 'use strict';
 // Declare app level module which depends on filters, and services
-var myApp = angular.module('myApp', ['ngAnimate', 'ui.bootstrap']);
+var myApp = angular.module('myApp', ['ngAnimate', 'ui.bootstrap', 'ngMessages']);
 
 myApp.controller('myController', function($scope, $uibModal, $log) {
         $scope.newUser = {
@@ -31,11 +31,14 @@ myApp.controller('myController', function($scope, $uibModal, $log) {
             edit: true
         }];
 
-        $scope.addUser = function() {
-            var user = angular.copy($scope.newUser);
-            user.edit = true;
-            $scope.users.push(user);
-        }
+        $scope.submitForm = function(isValid) {
+            // check to make sure the form is completely valid
+            if (isValid) {
+                var user = angular.copy($scope.newUser);
+                user.edit = true;
+                $scope.users.push(user);
+            }
+        };
 
         $scope.removeUser = function(index) {
             var modalInstance = $uibModal.open({
@@ -59,11 +62,11 @@ myApp.controller('myController', function($scope, $uibModal, $log) {
         }
     })
     .controller('removeUserController', function($scope, $uibModalInstance) {
-        $scope.confirm = function () {
+        $scope.confirm = function() {
             $uibModalInstance.close();
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $uibModalInstance.dismiss();
         }
     });
