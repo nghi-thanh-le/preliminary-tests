@@ -6,10 +6,6 @@ import AddUser from './addUser';
 import UsersTable from './usersTable';
 
 class App extends React.Component {
-    componentDidMount() {
-        console.log('App.props:::::', this.props);
-    }
-
     render() {
         return (
             <div>
