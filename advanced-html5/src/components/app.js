@@ -1,6 +1,7 @@
 import React from 'react';
 import {bindActionCreators, connect} from 'react-redux';
 
+import NavBar from './navBar';
 import AddUser from './addUser';
 import UsersTable from './usersTable';
 
@@ -11,14 +12,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <AddUser addUser={this.props.addUser}/>
-                <UsersTable
-                    users={this.props.users}
-                    editUser={this.props.editUser}
-                    deleteUser={this.props.deleteUser}
-                    toggleEdit={this.props.toggleEdit}
-                    />
+            <div>
+                <NavBar />
+                <div className="container">
+                    <AddUser addUser={this.props.addUser}/>
+                    <UsersTable
+                        users={this.props.users}
+                        editUser={this.props.editUser}
+                        deleteUser={this.props.deleteUser}
+                        toggleEdit={this.props.toggleEdit}
+                        />
+                </div>
             </div>
         );
     }
