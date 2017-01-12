@@ -6,22 +6,27 @@ class TableHead extends React.Component {
 
         this.state = {
             ageSort: false,
+            ageSortIcon: false,
             nameSort: false,
-            genderSort: false
+            nameSortIcon: false,
+            genderSort: false,
+            genderSortIcon: false
         }
 
         this.sort = this.sort.bind(this);
     }
 
     sort(prop) {
-        let tempVar = prop.concat('Sort');
+        let sortTempVar = prop.concat('Sort');
+        let iconTempVar = prop.concat('SortIcon');
         let newState = {};
-        if(this.state[tempVar]) {
+        if(this.state[sortTempVar]) {
             this.props.sortDesc(prop);
         } else {
             this.props.sortAsc(prop);
         }
-        newState[tempVar] = !this.state[tempVar];
+        newState[sortTempVar] = !this.state[sortTempVar];
+        newState[iconTempVar] = !this.state[iconTempVar];
         this.setState(newState);
     }
 
@@ -31,13 +36,19 @@ class TableHead extends React.Component {
                 <tr>
                     <th onClick={() => {
                         this.sort('name')
-                    }}>Name</th>
+                    }}>
+                        Name <i className={'fa '.concat(this.state.nameSort ? 'fa-long-arrow-down' : 'fa-long-arrow-up')} aria-hidden='true'></i>
+                    </th>
                     <th onClick={() => {
                         this.sort('gender')
-                    }}>Gender</th>
+                    }}>
+                        Gender <i className={'fa '.concat(this.state.genderSort ? 'fa-long-arrow-down' : 'fa-long-arrow-up')} aria-hidden='true'></i>
+                    </th>
                     <th onClick={() => {
                         this.sort('age')
-                    }}>Age</th>
+                    }}>
+                        Age <i className={'fa '.concat(this.state.ageSort ? 'fa-long-arrow-down' : 'fa-long-arrow-up')} aria-hidden='true'></i>
+                    </th>
                     <th></th>
                 </tr>
             </thead>

@@ -23,7 +23,7 @@ class UsersTable extends React.Component {
         if(this.props.users.length <= this.state.pageLimit) {
             numPage = 1;
         } else {
-            numPage = this.props.users.length / this.state.pageLimit;
+            numPage = Math.ceil(this.props.users.length / this.state.pageLimit);
         }
 
         return (
@@ -38,7 +38,14 @@ class UsersTable extends React.Component {
                         pageLimit={this.state.pageLimit}
                         activePage={this.state.activePage} />
                 </table>
-                <Pagination bsSize="small" activePage={this.state.activePage} items={numPage} onSelect={this.handleSelect}/>
+                <div className='text-center'>
+                    <Pagination
+                        bsSize="small"
+                        activePage={this.state.activePage}
+                        items={numPage}
+                        maxButtons={4}
+                        onSelect={this.handleSelect}/>
+                </div>
             </div>
         );
     }

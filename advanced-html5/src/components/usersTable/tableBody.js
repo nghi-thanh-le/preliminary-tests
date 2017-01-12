@@ -77,12 +77,21 @@ class TableBody extends React.Component {
                             : user.age}
                         </td>
                         <td>
-                            <button type='button' className='btn btn-xs btn-success' onClick={() => {
-                                _this.edit(index)
-                            }}>Edit</button>
-                            <button type='button' className='btn btn-xs btn-warning' onClick={() => {
+                            <button type='button'
+                                className={user.edit ? 'btn btn-xs btn-info' : 'btn btn-xs btn-default'}
+                                onClick={() => {
+                                    _this.edit(index)
+                                }}>
+                                <i className='fa fa-pencil-square-o' aria-hidden='true'></i>
+                            </button>
+                        <button
+                            type='button'
+                            className='btn btn-xs btn-default'
+                            onClick={() => {
                                 _this.open(index)
-                            }}>Delete</button>
+                            }}>
+                            <i className='fa fa-trash-o' aria-hidden='true'></i>
+                        </button>
                         </td>
                     </tr>
                 )

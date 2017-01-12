@@ -1,44 +1,6 @@
-const sampleDB = [{
-    name: 'John Doe',
-    gender: 'Male',
-    age: 32,
-    edit: false
-}, {
-    name: 'Diana Barry',
-    gender: 'Female',
-    age: 28,
-    edit: false
-}, {
-    name: 'Bruce Wayne',
-    gender: 'Male',
-    age: 46,
-    edit: false
-}, {
-    name: 'Jane Porter',
-    gender: 'Female',
-    age: 19,
-    edit: false
-}];
+import usersGenerator from './libs/usersGenerator';
 
-let initialState = [];
-
-const ID = () => {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
-};
-
-for (let i = 0; i < 100; i++) {
-    let index = Math.floor((Math.random() * 4));
-    initialState.push({
-        id: ID(),
-        ...sampleDB[index]
-    });
-}
+let initialState = usersGenerator();
 
 export default (state = initialState, action) => {
     let newState = [].concat(state);
