@@ -31,12 +31,12 @@
                 </div>
             </form>
 
-            <div ng-messages="userForm.name.$error" ng-if="userForm.name.$touched" class="text-warning">
+            <div ng-messages="userForm.name.$error" ng-if="userForm.name.$dirty" class="text-warning">
                 <p ng-message="minlength">Your name is too short.</p>
                 <p ng-message="maxlength">Your name is too long.</p>
                 <p ng-message="required">Your name is required.</p>
             </div>
-            <div ng-messages="userForm.age.$error" ng-if="userForm.name.$touched" class="text-warning">
+            <div ng-messages="userForm.age.$error" ng-if="userForm.name.$dirty" class="text-warning">
                 <p ng-message="min">Your age can not be less than 0.</p>
                 <p ng-message="max">Your age can not be more than 100.</p>
                 <p ng-message="required">Your age is required.</p>
@@ -91,8 +91,12 @@
                             <input type="number" ng-model="user.age" class="form-control" ng-hide="user.edit">
                         </td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-success" ng-click="editUser($index)">Edit</button>
-                            <button type="button" class="btn btn-xs btn-warning" ng-click="removeUser(user.id)">Delete</button>
+                            <button type="button" ng-class="user.edit ? 'btn btn-xs btn-default' : 'btn btn-xs btn-info'" ng-click="editUser($index)">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-xs btn-default" ng-click="removeUser(user.id)">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>

@@ -47,15 +47,15 @@ class TableBody extends React.Component {
     }
 
     render () {
-        let iteration = 0,
+        let i = 0,
             start = this.props.activePage * this.props.pageLimit - this.props.pageLimit,
             stop = this.props.activePage * this.props.pageLimit,
             tableRows = [],
             _this = this;
         this.props.users.map((user, index) => {
-            if (iteration >= stop)
+            if (i >= stop)
                 return;
-            if (start <= iteration) {
+            if (start <= i) {
                 tableRows.push(
                     <tr key={index}>
                         <td>
