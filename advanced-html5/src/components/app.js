@@ -2,8 +2,8 @@ import React from 'react';
 import {bindActionCreators, connect} from 'react-redux';
 
 import NavBar from './navBar';
-import AddUser from './addUser';
-import UsersTable from './usersTable';
+import AddUser from './addUser/addUser';
+import UsersTable from './usersTable/usersTable';
 
 class App extends React.Component {
     render() {
@@ -17,6 +17,8 @@ class App extends React.Component {
                         editUser={this.props.editUser}
                         deleteUser={this.props.deleteUser}
                         toggleEdit={this.props.toggleEdit}
+                        sortAsc={this.props.sortAsc}
+                        sortDesc={this.props.sortDesc}
                         />
                 </div>
             </div>
@@ -55,6 +57,18 @@ const mapDispatchToProps = function (dispatch) {
             dispatch({
                 type: 'TOGGLE_EDIT',
                 index
+            });
+        },
+        sortAsc: function (prop) {
+            dispatch({
+                type: 'SORT_USERS_ASC',
+                prop
+            });
+        },
+        sortDesc: function (prop) {
+            dispatch({
+                type: 'SORT_USERS_DESC',
+                prop
             });
         }
     };
