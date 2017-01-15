@@ -96,7 +96,7 @@ class TableBody extends React.Component {
                     </tr>
                 )
             }
-            iteration++;
+            i++;
         });
         return (
             <tbody>
